@@ -10,6 +10,7 @@ function Calculator() {
         operand: 0,
         operator: null,
         isNextClear: false,
+        display: "0",
         history: "0"
     });
     const buttonHandler = (code: string) => {
@@ -19,7 +20,7 @@ function Calculator() {
     return (
         <div>
             <History history={state.history} />
-            <Display value={state.current} />
+            <Display value={state.display} />
             <ButtonPanel buttonHandler={buttonHandler} />
         </div>
     )
