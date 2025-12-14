@@ -50,7 +50,6 @@ function isNumberButton(button: string) {
 }
 
 function handleNumberButton(button: string, state: State) {
-    console.log(state);
     if (state.isNextClear) {
         return {
             current: button,
@@ -58,7 +57,7 @@ function handleNumberButton(button: string, state: State) {
             operator: state.operator,
             isNextClear: false,
             display: state.operand === 0 ? button : state.display + button,
-            history: state.operand === 0 ? button : state.history + button
+            history: state.history
         }
     }
     if (state.current === "0") {
@@ -68,7 +67,7 @@ function handleNumberButton(button: string, state: State) {
             operator: state.operator,
             isNextClear: false,
             display: state.display.substring(0, state.display.length - 1) + button,
-            history: state.history.substring(0, state.history.length - 1) + button,
+            history: state.history
         }
     }
     return {
@@ -77,7 +76,7 @@ function handleNumberButton(button: string, state: State) {
         operator: state.operator,
         isNextClear: false,
         display: state.display + button,
-        history: state.history + button
+        history: state.history
     };
 }
 
@@ -93,7 +92,7 @@ function handleOperationButon(button: string, state: State): State {
             operator: button,
             isNextClear: true,
             display: state.current + button,
-            history: state.current + button
+            history: state.history
         }
     }
     const nextValue = operate(state);
@@ -103,7 +102,7 @@ function handleOperationButon(button: string, state: State): State {
         operator: button,
         isNextClear: true,
         display: state.display + button,
-        history: state.history + button
+        history: state.history
     }
 
     throw new Error("Function not implemenmted.");
@@ -123,7 +122,7 @@ function handleDotButton(state: State): State {
         operator: state.operator,
         isNextClear: false,
         display: state.display + ".",
-        history: state.history + "."
+        history: state.history
     }
 }
 
@@ -132,7 +131,6 @@ function isDeleteButton(button: string) {
 }
 
 function handleDeleteButton(state: State) {
-    console.log(state);
     if (state.current.length === 1 || state.isNextClear) {
         return {
             current: "0",
@@ -149,7 +147,7 @@ function handleDeleteButton(state: State) {
         operator: state.operator,
         isNextClear: false,
         display: state.display.substring(0, state.display.length - 1),
-        history: state.history.substring(0, state.history.length - 1)
+        history: state.history
     }
 }
 
@@ -183,7 +181,7 @@ function handleEqualButton(state: State) {
         operator: null,
         isNextClear: true,
         display: `${nextValue}`,
-        history: `${state.history} = ${nextValue}`
+        history: `${state.display} = ${nextValue}`
     };
 }
 
