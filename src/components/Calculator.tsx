@@ -1,6 +1,6 @@
 import Display from './Display'
 import ButtonPanel from './ButtonPanel'
-import { calculate, type State } from '../logic/calculate'
+import { calculate, type ButtonCode, type State } from '../logic/calculate'
 import { useState } from 'react'
 import History from './History';
 
@@ -13,7 +13,7 @@ function Calculator() {
         display: "0",
         history: "0"
     });
-    const buttonHandler = (code: string) => {
+    const buttonHandler = (code: ButtonCode) => {
         const nextState = calculate(code, state);
         setState(nextState);
     }

@@ -1,5 +1,7 @@
+import type { ButtonCode } from "../logic/calculate";
+
 function ButtonPanel(props: {
-    buttonHandler: (code: string) => void;
+    buttonHandler: (code: ButtonCode) => void;
 }) {
     return (
         <>

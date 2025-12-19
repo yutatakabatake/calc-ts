@@ -1,4 +1,19 @@
-export function calculate(button: string, state: State): State {
+export type Operator = "+" | "-";
+export type NumberCode =
+    "0" |
+    "1" |
+    "2" |
+    "3" |
+    "4" |
+    "5" |
+    "6" |
+    "7" |
+    "8" |
+    "9";
+export type ButtonCode = NumberCode | Operator | "." | "D" | "AC" | "=";
+
+
+export function calculate(button: ButtonCode, state: State): State {
     if (isNumberButton(button)) {
         return handleNumberButton(button, state);
     }
@@ -49,7 +64,7 @@ function isNumberButton(button: string) {
     );
 }
 
-function handleNumberButton(button: string, state: State) {
+function handleNumberButton(button: NumberCode, state: State) {
     if (state.isNextClear) {
         return {
             current: button,
@@ -84,7 +99,7 @@ function isOperatorButton(button: string) {
     return button === '+' || button === '-';
 }
 
-function handleOperationButon(button: string, state: State): State {
+function handleOperationButon(button: Operator, state: State): State {
     if (state.operator === null) {
         return {
             current: "0",
